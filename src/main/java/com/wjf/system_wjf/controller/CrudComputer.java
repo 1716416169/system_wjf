@@ -57,9 +57,11 @@ public class CrudComputer {//pom文件jdbc starter 和 mysql-connect-java starte
             @ApiImplicitParam(name="size",value="本页条数",dataType="Integer", paramType = "query",example="1"),
             @ApiImplicitParam(name="ids",value="数组",dataType="Integer[]", paramType = "query",example="1")
     })
-    public Page<Computer> deleteComputer(Integer page, Integer size,Integer ... ids){
-        Page<Computer> computer1 = crudComputerServer.deleteComputer(ids);
-        System.out.println("删除的复数"+computer1);
+    public Page<Computer> deleteComputer(Integer page, Integer size,@RequestParam(value = "ids[]")Integer ... ids){
+        for (Integer id:ids) {
+            System.out.println(id);
+        }
+        crudComputerServer.deleteComputer(ids);
         Page<Computer> computers = crudComputerServer.selectComputer(page, size);
         return computers;
     }
@@ -84,7 +86,9 @@ public class CrudComputer {//pom文件jdbc starter 和 mysql-connect-java starte
             @ApiImplicitParam(name="name",value="名字",dataType="String", paramType = "query",example="test")
     })
     public Page<Computer> selectComputerByName(Integer page,Integer size,String name){
+        System.out.println("查询名字"+name);
         Page<Computer> computers = crudComputerServer.selectComputerByName(page, size, name);
+        System.out.println("名字查询："+computers);
         return computers;
     }
 
