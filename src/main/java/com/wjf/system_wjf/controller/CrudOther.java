@@ -1,6 +1,5 @@
 package com.wjf.system_wjf.controller;
 
-import com.wjf.system_wjf.entity.Computer;
 import com.wjf.system_wjf.entity.Other;
 import com.wjf.system_wjf.server.impl.CrudOtherServerImpl;
 import io.swagger.annotations.ApiImplicitParam;
