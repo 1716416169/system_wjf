@@ -17,11 +17,11 @@ public class Manger {
 
     @Column(name = "username")
     @ApiModelProperty(value="账号",name="账号",example="1")
-    private Integer username;
+    private String username;
 
     @Column(name = "password")
     @ApiModelProperty(value="密码",name="密码",example="1")
-    private Integer password;
+    private String password;
 
     public Integer getId() {
         return id;
@@ -31,29 +31,28 @@ public class Manger {
         this.id = id;
     }
 
-    public Integer getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(Integer username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
     }
-
 
     @Override
     public String toString() {
         return "Manger{" +
                 "id=" + id +
-                ", username=" + username +
-                ", password=" + password +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

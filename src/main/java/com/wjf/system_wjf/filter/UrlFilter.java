@@ -5,6 +5,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+
+
 @WebFilter(filterName = "test", urlPatterns = "/*")
 public class UrlFilter implements Filter {
 
@@ -22,7 +24,7 @@ public class UrlFilter implements Filter {
         System.out.println("--------------------->过滤器：请求地址"+requestURI);
         if(!requestURI.contains("login")){
             System.out.println("请登录");
-            servletRequest.getRequestDispatcher("/login/failed").forward(servletRequest, servletResponse);
+            servletRequest.getRequestDispatcher("/failed/failed").forward(servletRequest, servletResponse);
         }else{
             System.out.println("666");
             filterChain.doFilter(servletRequest, servletResponse);
