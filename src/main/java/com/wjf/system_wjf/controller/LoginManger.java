@@ -5,11 +5,13 @@ import com.wjf.system_wjf.server.impl.CrudMangerServerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowCredentials="true")
 @RequestMapping("/loginManger")
 public class LoginManger {
 
@@ -22,9 +24,9 @@ public class LoginManger {
         Manger manger1= crudMangerServer.insertManger(manger);
         System.out.println(manger1);
         if(manger1==null){
-            return 0;
+            return 10;
         }else {
-            return 1;
+            return 11;
         }
     }
 
@@ -38,13 +40,18 @@ public class LoginManger {
     }
 
     @GetMapping("/login")
-    public Integer login(Manger manger){
+    public Manger login(Manger manger, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest){
         Manger manger1 = crudMangerServer.selectManger(manger);
         System.out.println(manger1);
         if(manger1 ==null){
-            return 0;
+            return null;
         }else {
-            return 1;
+            httpServletRequest.getSession().setAttribute(manger.getUsername(),manger.getPassword());
+            httpServletRequest.getSession().setAttribute("ob","manger");
+            System.out.println(httpServletRequest.getSession().getAttribute(manger.getUsername()));
+            System.out.println(httpServletRequest.getSession().getAttribute("ob"));
+            manger.setFlag("manger");
+            return manger;
         }
 
     }

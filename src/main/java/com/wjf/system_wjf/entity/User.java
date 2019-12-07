@@ -15,6 +15,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "flag")
+    @ApiModelProperty(value="标识",name="flag",example="1")
+    private String flag;
+
     @Column(name = "username")
     @ApiModelProperty(value="账号",name="username",example="1")
     private String username;
@@ -47,10 +51,19 @@ public class User {
         this.password = password;
     }
 
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", flag='" + flag + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';

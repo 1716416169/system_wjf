@@ -1,17 +1,18 @@
 package com.wjf.system_wjf.controller;
 
 import com.wjf.system_wjf.entity.User;
-import com.wjf.system_wjf.repository.UserRepository;
-import com.wjf.system_wjf.server.CrudUserServer;
 import com.wjf.system_wjf.server.impl.CrudUserServerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowCredentials="true")
 @RequestMapping("/login")
 public class Login {
 
@@ -20,9 +21,9 @@ public class Login {
 
     @PutMapping("/register")
     public Integer register(User user){
-        System.out.println(user.getUsername());
+        System.out.println("注册的账号："+user.getUsername());
         User user1 = crudUserServer.insertUser(user);
-        System.out.println(user1);
+        System.out.println("创建的用户："+user1);
         if(user1==null){
             return 0;
         }else {
@@ -40,13 +41,17 @@ public class Login {
     }
 
     @GetMapping("/login")
-    public Integer login(User user){
+    public User login(User user, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest){
         User user1 = crudUserServer.selectUser(user);
-        System.out.println(user1);
         if(user1==null){
-            return 0;
+            return null;
         }else {
-            return 1;
+            httpServletRequest.getSession().setAttribute(user.getUsername(),user.getPassword());
+            httpServletRequest.getSession().setAttribute("ob","user");
+            System.out.println(httpServletRequest.getSession().getAttribute(user.getUsername()));
+            System.out.println(httpServletRequest.getSession().getAttribute("ob"));
+            user.setFlag("user");
+            return user;
         }
 
     }

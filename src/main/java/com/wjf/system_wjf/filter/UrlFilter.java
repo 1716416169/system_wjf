@@ -22,11 +22,12 @@ public class UrlFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String requestURI = req.getRequestURI();
         System.out.println("--------------------->过滤器：请求地址"+requestURI);
-        if(!requestURI.contains("login")){
+        if(!requestURI.contains("/login")){
             System.out.println("请登录");
-            servletRequest.getRequestDispatcher("/failed/failed").forward(servletRequest, servletResponse);
+            filterChain.doFilter(servletRequest, servletResponse);
+            //servletRequest.getRequestDispatcher("/failed/failed").forward(servletRequest, servletResponse);
         }else{
-            System.out.println("666");
+            System.out.println("放行");
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }

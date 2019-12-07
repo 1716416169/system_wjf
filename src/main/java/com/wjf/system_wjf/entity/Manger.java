@@ -15,6 +15,10 @@ public class Manger {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "flag")
+    @ApiModelProperty(value="标识",name="flag",example="1")
+    private String flag;
+
     @Column(name = "username")
     @ApiModelProperty(value="账号",name="账号",example="1")
     private String username;
@@ -22,6 +26,14 @@ public class Manger {
     @Column(name = "password")
     @ApiModelProperty(value="密码",name="密码",example="1")
     private String password;
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
 
     public Integer getId() {
         return id;
