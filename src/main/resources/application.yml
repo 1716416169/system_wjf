@@ -1,5 +1,4 @@
 spring:
-  thymeleaf:
   prefix: classpath:/templates
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,3 +11,6 @@ spring:
       ddl-auto: create
   main:
     allow-bean-definition-overriding: true
+server:
+  servlet:
+    context-path: /system_wjf_java
